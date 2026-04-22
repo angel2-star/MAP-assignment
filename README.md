@@ -9,13 +9,16 @@ Valentine should be able to see reports on what each employee did and the condit
 of the vehicles when they were checked in. The assessment rubric in Table 1 will be
 used to grade the assignment.
 Table 1: Assessment Rubric
-Criteria / Poor (10) Average (55) Excellent (100)
-Component
-App Architecture (2) (11) (20)
-Code (2) (11) (20)
-Functionality (2) (11) (20)
-UI & Navigation (2) (11) (20)
-Presentation (2) (11) (20)
+| Criteria/Component | Poor(10) | Average(55) | Excellent(100) |
+| :--- | :--- | :--- | :--- |
+| App Architecture | (2) | (11) | (20) |
+| Code | (2) | (11) | (20) |
+| Functionality | (2) | (11) | (20) |
+| UI & Navigation | (2) | (11) | (20) |
+| Presentation | (2) | (11) | (20) |
+
+
+
 NB: Excellent means all components were met satisfactorily.The scale goes down to Poor.
 The detailed description of the rubric components is given below:
 1. App Architecture - Layered architecture, modularisation, and resources files.
