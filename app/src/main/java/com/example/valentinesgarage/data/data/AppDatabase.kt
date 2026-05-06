@@ -12,3 +12,8 @@ import com.example.valentinesgarage.data.entity.TaskEntity
 import com.example.valentinesgarage.data.entity.UserEntity
 import com.example.valentinesgarage.data.entity.VehicleEntity
 
+@Database(
+    entities = [UserEntity::class, VehicleEntity::class, TaskEntity::class],
+    version = 1,
+    exportSchema = false
+)
