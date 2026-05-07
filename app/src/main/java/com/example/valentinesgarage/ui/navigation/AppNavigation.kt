@@ -29,6 +29,20 @@ fun AppNavigation() {
         navcontroller = navController,
         startDestination = Routes.LOGIN
     ){
-
+        composable(Routes.LOGIN) {
+            LoginScreen(
+                onLoginSuccess = { role ->
+                    if (role == "manager") {
+                        navController.navigate(Routes.REPORTS) {
+                            popUpTo(Routes.LOGIN) { inclusive = true }
+                        }
+                    } else {
+                        navController.navigate(Routes.CHECKIN) {
+                            popUpTo(Routes.LOGIN) { inclusive = true }
+                        }
+                    }
+                }
+            )
+        }
     }
 }
