@@ -20,3 +20,15 @@ object Routes {
 
     fun checklist(vehicleId: Int) = "checklist/$vehicleId"
 }
+
+@Composable
+fun AppNavigation() {
+    val navController = rememberNavController()
+
+    NavHost(
+        navcontroller = navController,
+        startDestination = Routes.LOGIN
+    ){
+
+    }
+}
