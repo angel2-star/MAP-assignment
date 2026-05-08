@@ -71,5 +71,15 @@ fun AppNavigation() {
                 }
             )
         }
+
+        composable(Routes.REPORTS) {
+            ReportsScreen(
+                onLogout = {
+                    navController.navigate(Routes.LOGIN) {
+                        popUpTo(0) { inclusive = true }
+                    }
+                }
+            )
+        }
     }
 }
