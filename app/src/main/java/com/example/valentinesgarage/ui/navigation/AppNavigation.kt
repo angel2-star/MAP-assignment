@@ -11,7 +11,7 @@ import com.example.valentinesgarage.ui.screens.ChecklistScreen
 import com.example.valentinesgarage.ui.screens.LoginScreen
 import com.example.valentinesgarage.ui.screens.ReportsScreen
 
-// Define all screen routes as constants
+//Define all screen routes as constants
 object Routes {
     const val LOGIN = "login"
     const val CHECKIN = "checkin"
