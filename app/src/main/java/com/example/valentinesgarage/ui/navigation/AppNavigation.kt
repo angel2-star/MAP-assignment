@@ -44,5 +44,17 @@ fun AppNavigation() {
                 }
             )
         }
+        composable(Routes.CHECKIN) {
+            CheckInScreen(
+                onGoToChecklist = { vehicleId ->
+                    navController.navigate(Routes.checklist(vehicleId))
+                },
+                onLogout = {
+                    navController.navigate(Routes.LOGIN) {
+                        popUpTo(0) { inclusive = true }
+                    }
+                }
+            )
+        }
     }
 }
