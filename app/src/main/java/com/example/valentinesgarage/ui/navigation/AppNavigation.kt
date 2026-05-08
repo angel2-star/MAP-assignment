@@ -56,5 +56,20 @@ fun AppNavigation() {
                 }
             )
         }
+        composable(
+            route = Routes.CHECKLIST,
+            arguments = listOf(navArgument("vehicleId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val vehicleId = backStackEntry.arguments?.getInt("vehicleId") ?: -1
+            ChecklistScreen(
+                vehicleId = vehicleId,
+                onBack = { navController.popBackStack() },
+                onLogout = {
+                    navController.navigate(Routes.LOGIN) {
+                        popUpTo(0) { inclusive = true }
+                    }
+                }
+            )
+        }
     }
 }
