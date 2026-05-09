@@ -24,4 +24,6 @@ interface TaskDao{
     @Query("SELECT * FROM tasks WHERE isCompleted = 1")
     fun getAllCompletedTasks(): LiveData<List<TaskEntity>>
 
+		@Query("DELETE FROM tasks WHERE taskid = :taskid)
+		fun deleteTask(taskId: Int): LiveData<List<TaskEntity>>
 }
