@@ -5,5 +5,20 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class ChecklistViewModelTest {
+    ChecklistViewModel.addTask
+    private fun isValidTask(title: String): Boolean {
+        return title.isNotBlank()
+    }
 
+    private fun buildUpdatedTask(
+        task: TaskEntity,
+        isCompleted: Boolean,
+        notes: String
+    ): TaskEntity {
+        return task.copy(
+            isCompleted = isCompleted,
+            notes = notes,
+            completedAt = if (isCompleted) System.currentTimeMillis() else null
+        )
+    }
 }
