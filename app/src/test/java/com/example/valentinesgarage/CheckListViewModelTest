@@ -195,4 +195,13 @@ class ChecklistViewModelTest {
         )
         assertEquals(tasks.size, tasks.count { it.isCompleted })
     }
+
+        @Test
+    fun no tasks completed returns zero count() {
+        val tasks = listOf(
+            TaskEntity(id = 1, vehicleId = 1, title = "Oil change", isCompleted = false, assignedToUserId = 2),
+            TaskEntity(id = 2, vehicleId = 1, title = "Brake check", isCompleted = false, assignedToUserId = 2)
+        )
+        assertEquals(0, tasks.count { it.isCompleted })
+    }
 }
