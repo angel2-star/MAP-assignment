@@ -120,4 +120,37 @@ class ChecklistViewModelTest {
         val updated = buildUpdatedTask(task, false, "")
         assertEquals("", updated.notes)
     }
+
+      @Test
+    fun updating notes does not change task title() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 1,
+            title = "Filter replacement",
+            assignedToUserId = 2
+        )
+        val updated = buildUpdatedTask(task, false, "New filter installed")
+        assertEquals("Filter replacement", updated.title)
+    }
+
+    @Test
+    fun updating notes does not change vehicleId() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 5,
+            title = "Spark plug check",
+            assignedToUserId = 2
+        )
+        val updated = buildUpdatedTask(task, true, "Replaced two plugs")
+        assertEquals(5, updated.vehicleId)
+    }
+
+    @Test
+    fun updating notes does not change assignedToUserId() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 1,
+            title = "Battery check",
+            assignedToUserId = 3
+        )
+        val updated = buildUpdatedTask(task, false, "Battery at 80%")
+        assertEquals(3, updated.assignedToUserId)
+    }
 }
