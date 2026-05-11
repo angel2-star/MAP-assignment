@@ -21,4 +21,29 @@ class ChecklistViewModelTest {
             completedAt = if (isCompleted) System.currentTimeMillis() else null
         )
     }
+
+      @Test
+    fun blank task title is rejected() {
+        assertFalse(isValidTask(""))
+    }
+
+    @Test
+    fun whitespace only task title is rejected() {
+        assertFalse(isValidTask("   "))
+    }
+
+    @Test
+    fun valid task title is accepted() {
+        assertTrue(isValidTask("Oil change"))
+    }
+
+    @Test
+    fun task title with leading and trailing spaces is valid() {
+        assertTrue(isValidTask("  Brake check  "))
+    }
+
+    @Test
+    fun single character task title is valid() {
+        assertTrue(isValidTask("A"))
+    }
 }
