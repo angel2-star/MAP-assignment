@@ -164,4 +164,15 @@ class ChecklistViewModelTest {
         val vehicle1Tasks = tasks.filter { it.vehicleId == 1 }
         assertEquals(2, vehicle1Tasks.size)
     }
+
+    @Test
+    fun completed task count is correct() {
+        val tasks = listOf(
+            TaskEntity(id = 1, vehicleId = 1, title = "Oil change", isCompleted = true, assignedToUserId = 2),
+            TaskEntity(id = 2, vehicleId = 1, title = "Brake check", isCompleted = false, assignedToUserId = 2),
+            TaskEntity(id = 3, vehicleId = 1, title = "Tyre rotation", isCompleted = true, assignedToUserId = 2)
+        )
+        val completedCount = tasks.count { it.isCompleted }
+        assertEquals(2, completedCount)
+    }
 }
