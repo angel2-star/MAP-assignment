@@ -1,0 +1,9 @@
+package com.example.valentinesgarage
+
+import com.example.valentinesgarage.data.entity.TaskEntity
+import org.junit.Assert.*
+import org.junit.Test
+
+class ChecklistViewModelTest {
+
+}
