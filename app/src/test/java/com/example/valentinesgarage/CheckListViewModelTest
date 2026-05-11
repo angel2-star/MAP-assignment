@@ -46,4 +46,78 @@ class ChecklistViewModelTest {
     fun single character task title is valid() {
         assertTrue(isValidTask("A"))
     }
+
+     @Test
+    fun marking task completed sets isCompleted to true() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 1,
+            title = "Oil change",
+            assignedToUserId = 2
+        )
+        val updated = buildUpdatedTask(task, true, "Used 5W-30 oil")
+        assertTrue(updated.isCompleted)
+    }
+
+    @Test
+    fun marking task completed sets completedAt timestamp() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 1,
+            title = "Oil change",
+            assignedToUserId = 2
+        )
+        val before = System.currentTimeMillis()
+        val updated = buildUpdatedTask(task, true, "")
+        val after = System.currentTimeMillis()
+        assertNotNull(updated.completedAt)
+        assertTrue(updated.completedAt!! in before..after)
+    }
+
+    @Test
+    fun unchecking task sets isCompleted to false() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 1,
+            title = "Brake check",
+            isCompleted = true,
+            completedAt = System.currentTimeMillis(),
+            assignedToUserId = 2
+        )
+        val updated = buildUpdatedTask(task, false, "")
+        assertFalse(updated.isCompleted)
+    }
+
+    @Test
+    fun unchecking task clears completedAt timestamp() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 1,
+            title = "Brake check",
+            isCompleted = true,
+            completedAt = System.currentTimeMillis(),
+            assignedToUserId = 2
+        )
+        val updated = buildUpdatedTask(task, false, "")
+        assertNull(updated.completedAt)
+    }
+
+    @Test
+    fun saving notes updates task notes correctly() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 1,
+            title = "Tyre rotation",
+            assignedToUserId = 2
+        )
+        val updated = buildUpdatedTask(task, false, "All four tyres rotated")
+        assertEquals("All four tyres rotated", updated.notes)
+    }
+
+    @Test
+    fun saving empty notes clears task notes() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 1,
+            title = "Coolant check",
+            notes = "Previous note",
+            assignedToUserId = 2
+        )
+        val updated = buildUpdatedTask(task, false, "")
+        assertEquals("", updated.notes)
+    }
 }
