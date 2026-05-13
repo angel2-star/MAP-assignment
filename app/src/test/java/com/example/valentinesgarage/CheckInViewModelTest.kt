@@ -22,4 +22,8 @@ class CheckInViewModelTest {
     fun `blank owner name fails validation`() {
         assertFalse(isValidCheckIn("N 123 ABC", "", "5000"))
     }
+    @Test
+    fun `blank kilometers fails validation`() {
+        assertFalse(isValidCheckIn("N 123 ABC", "John", ""))
+    }
 }
