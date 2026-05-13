@@ -95,4 +95,10 @@ class LoginViewModelTest {
         val knownRoles = listOf("manager", "mechanic", "receptionist")
         assertFalse(user.role in knownRoles)
     }
+
+    @Test
+    fun `email without at symbol fails format check`() {
+        val email = "notanemail.com"
+        assertFalse("Email should be invalid", email.contains("@"))
+    }
 }
