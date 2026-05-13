@@ -20,6 +20,12 @@ import org.mockito.kotlin.*
 @OptIn(ExperimentalCoroutinesApi::class)
 class LoginViewModelTest {
 
+    companion object {
+        const val MANAGER_EMAIL = "manager@garage.com"
+        const val MANAGER_PASSWORD = "admin123"
+        const val MECHANIC_EMAIL = "john@garage.com"
+    }
+
     @get:Rule
     val rule: TestRule = InstantTaskExecutorRule()
 
