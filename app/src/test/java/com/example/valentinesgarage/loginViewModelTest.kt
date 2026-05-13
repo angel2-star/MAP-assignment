@@ -82,4 +82,11 @@ class LoginViewModelTest {
         val user = UserEntity(3, "Mary", "mary@garage.com", "rec123", "receptionist")
         assertEquals("receptionist", user.role)
     }
+
+    @Test
+    fun `unknown role does not match known roles`() {
+        val user = UserEntity(4, "Ghost", "ghost@garage.com", "pass123", "admin")
+        val knownRoles = listOf("manager", "mechanic", "receptionist")
+        assertFalse(user.role in knownRoles)
+    }
 }
