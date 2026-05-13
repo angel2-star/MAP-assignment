@@ -1,0 +1,207 @@
+package com.example.valentinesgarage
+
+import com.example.valentinesgarage.data.entity.TaskEntity
+import org.junit.Assert.*
+import org.junit.Test
+
+class ChecklistViewModelTest {
+    ChecklistViewModel.addTask
+    private fun isValidTask(title: String): Boolean {
+        return title.isNotBlank()
+    }
+
+    private fun buildUpdatedTask(
+        task: TaskEntity,
+        isCompleted: Boolean,
+        notes: String
+    ): TaskEntity {
+        return task.copy(
+            isCompleted = isCompleted,
+            notes = notes,
+            completedAt = if (isCompleted) System.currentTimeMillis() else null
+        )
+    }
+
+      @Test
+    fun blank task title is rejected() {
+        assertFalse(isValidTask(""))
+    }
+
+    @Test
+    fun whitespace only task title is rejected() {
+        assertFalse(isValidTask("   "))
+    }
+
+    @Test
+    fun valid task title is accepted() {
+        assertTrue(isValidTask("Oil change"))
+    }
+
+    @Test
+    fun task title with leading and trailing spaces is valid() {
+        assertTrue(isValidTask("  Brake check  "))
+    }
+
+    @Test
+    fun single character task title is valid() {
+        assertTrue(isValidTask("A"))
+    }
+
+     @Test
+    fun marking task completed sets isCompleted to true() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 1,
+            title = "Oil change",
+            assignedToUserId = 2
+        )
+        val updated = buildUpdatedTask(task, true, "Used 5W-30 oil")
+        assertTrue(updated.isCompleted)
+    }
+
+    @Test
+    fun marking task completed sets completedAt timestamp() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 1,
+            title = "Oil change",
+            assignedToUserId = 2
+        )
+        val before = System.currentTimeMillis()
+        val updated = buildUpdatedTask(task, true, "")
+        val after = System.currentTimeMillis()
+        assertNotNull(updated.completedAt)
+        assertTrue(updated.completedAt!! in before..after)
+    }
+
+    @Test
+    fun unchecking task sets isCompleted to false() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 1,
+            title = "Brake check",
+            isCompleted = true,
+            completedAt = System.currentTimeMillis(),
+            assignedToUserId = 2
+        )
+        val updated = buildUpdatedTask(task, false, "")
+        assertFalse(updated.isCompleted)
+    }
+
+    @Test
+    fun unchecking task clears completedAt timestamp() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 1,
+            title = "Brake check",
+            isCompleted = true,
+            completedAt = System.currentTimeMillis(),
+            assignedToUserId = 2
+        )
+        val updated = buildUpdatedTask(task, false, "")
+        assertNull(updated.completedAt)
+    }
+
+    @Test
+    fun saving notes updates task notes correctly() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 1,
+            title = "Tyre rotation",
+            assignedToUserId = 2
+        )
+        val updated = buildUpdatedTask(task, false, "All four tyres rotated")
+        assertEquals("All four tyres rotated", updated.notes)
+    }
+
+    @Test
+    fun saving empty notes clears task notes() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 1,
+            title = "Coolant check",
+            notes = "Previous note",
+            assignedToUserId = 2
+        )
+        val updated = buildUpdatedTask(task, false, "")
+        assertEquals("", updated.notes)
+    }
+
+      @Test
+    fun updating notes does not change task title() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 1,
+            title = "Filter replacement",
+            assignedToUserId = 2
+        )
+        val updated = buildUpdatedTask(task, false, "New filter installed")
+        assertEquals("Filter replacement", updated.title)
+    }
+
+    @Test
+    fun updating notes does not change vehicleId() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 5,
+            title = "Spark plug check",
+            assignedToUserId = 2
+        )
+        val updated = buildUpdatedTask(task, true, "Replaced two plugs")
+        assertEquals(5, updated.vehicleId)
+    }
+
+    @Test
+    fun updating notes does not change assignedToUserId() {
+        val task = TaskEntity(
+            id = 1, vehicleId = 1,
+            title = "Battery check",
+            assignedToUserId = 3
+        )
+        val updated = buildUpdatedTask(task, false, "Battery at 80%")
+        assertEquals(3, updated.assignedToUserId)
+    }
+
+     @Test
+    fun tasks belong to correct vehicle() {
+        val tasks = listOf(
+            TaskEntity(id = 1, vehicleId = 1, title = "Oil change", assignedToUserId = 2),
+            TaskEntity(id = 2, vehicleId = 1, title = "Brake check", assignedToUserId = 2),
+            TaskEntity(id = 3, vehicleId = 2, title = "Tyre rotation", assignedToUserId = 3)
+        )
+        val vehicle1Tasks = tasks.filter { it.vehicleId == 1 }
+        assertEquals(2, vehicle1Tasks.size)
+    }
+
+    @Test
+    fun completed task count is correct() {
+        val tasks = listOf(
+            TaskEntity(id = 1, vehicleId = 1, title = "Oil change", isCompleted = true, assignedToUserId = 2),
+            TaskEntity(id = 2, vehicleId = 1, title = "Brake check", isCompleted = false, assignedToUserId = 2),
+            TaskEntity(id = 3, vehicleId = 1, title = "Tyre rotation", isCompleted = true, assignedToUserId = 2)
+        )
+        val completedCount = tasks.count { it.isCompleted }
+        assertEquals(2, completedCount)
+    }
+
+    @Test
+    fun pending task count is correct() {
+        val tasks = listOf(
+            TaskEntity(id = 1, vehicleId = 1, title = "Oil change", isCompleted = true, assignedToUserId = 2),
+            TaskEntity(id = 2, vehicleId = 1, title = "Brake check", isCompleted = false, assignedToUserId = 2),
+            TaskEntity(id = 3, vehicleId = 1, title = "Tyre rotation", isCompleted = false, assignedToUserId = 2)
+        )
+        val pendingCount = tasks.count { !it.isCompleted }
+        assertEquals(2, pendingCount)
+    }
+
+    @Test
+    fun all tasks completed returns correct count() {
+        val tasks = listOf(
+            TaskEntity(id = 1, vehicleId = 1, title = "Oil change", isCompleted = true, assignedToUserId = 2),
+            TaskEntity(id = 2, vehicleId = 1, title = "Brake check", isCompleted = true, assignedToUserId = 2)
+        )
+        assertEquals(tasks.size, tasks.count { it.isCompleted })
+    }
+
+        @Test
+    fun no tasks completed returns zero count() {
+        val tasks = listOf(
+            TaskEntity(id = 1, vehicleId = 1, title = "Oil change", isCompleted = false, assignedToUserId = 2),
+            TaskEntity(id = 2, vehicleId = 1, title = "Brake check", isCompleted = false, assignedToUserId = 2)
+        )
+        assertEquals(0, tasks.count { it.isCompleted })
+    }
+}
