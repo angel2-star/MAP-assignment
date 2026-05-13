@@ -76,4 +76,10 @@ class LoginViewModelTest {
         val password = "abc"
         assertTrue("Password too short", password.length < 6)
     }
+
+    @Test
+    fun `receptionist role is recognized correctly`() {
+        val user = UserEntity(3, "Mary", "mary@garage.com", "rec123", "receptionist")
+        assertEquals("receptionist", user.role)
+    }
 }
