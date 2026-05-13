@@ -14,5 +14,8 @@ class CheckInViewModelTest {
         if (kilometersStr.toIntOrNull() == null) return false
         return true
     }
-
+    @Test
+    fun `blank plate number fails validation`() {
+        assertFalse(isValidCheckIn("", "John", "5000"))
+    }
 }
