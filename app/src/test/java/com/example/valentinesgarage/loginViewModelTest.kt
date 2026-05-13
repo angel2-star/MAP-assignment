@@ -45,7 +45,7 @@ class LoginViewModelTest {
     }
 
     @Test
-    fun `login with blank email posts error message`() {
+    fun `blank email fails login validation`() {
         val email = ""
         val password = "admin123"
         assertTrue("Email is blank", email.isBlank())
