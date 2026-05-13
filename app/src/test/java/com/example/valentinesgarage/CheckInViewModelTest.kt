@@ -45,4 +45,8 @@ class CheckInViewModelTest {
         val rating = 4
         assertTrue(rating in 1..5)
     }
+    @Test
+    fun `zero kilometers is valid`() {
+        assertTrue(isValidCheckIn("N 001 ZZZ", "New Owner", "0"))
+    }
 }
