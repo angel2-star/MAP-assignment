@@ -26,4 +26,8 @@ class CheckInViewModelTest {
     fun `blank kilometers fails validation`() {
         assertFalse(isValidCheckIn("N 123 ABC", "John", ""))
     }
+    @Test
+    fun `non numeric kilometers fails validation`() {
+        assertFalse(isValidCheckIn("N 123 ABC", "John", "abc"))
+    }
 }
