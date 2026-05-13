@@ -1,0 +1,18 @@
+package com.example.valentinesgarage
+
+import org.junit.Assert.*
+import org.junit.Test
+
+class CheckInViewModelTest {
+
+    private fun isValidCheckIn(
+        plateNumber: String,
+        ownerName: String,
+        kilometersStr: String
+    ): Boolean {
+        if (plateNumber.isBlank() || ownerName.isBlank() || kilometersStr.isBlank()) return false
+        if (kilometersStr.toIntOrNull() == null) return false
+        return true
+    }
+
+}
