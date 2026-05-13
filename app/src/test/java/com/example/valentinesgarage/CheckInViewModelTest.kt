@@ -30,4 +30,8 @@ class CheckInViewModelTest {
     fun `non numeric kilometers fails validation`() {
         assertFalse(isValidCheckIn("N 123 ABC", "John", "abc"))
     }
+    @Test
+    fun `valid inputs pass validation`() {
+        assertTrue(isValidCheckIn("N 123 ABC", "John Doe", "45000"))
+    }
 }
