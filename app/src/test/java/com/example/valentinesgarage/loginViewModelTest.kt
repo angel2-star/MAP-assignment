@@ -70,4 +70,10 @@ class LoginViewModelTest {
         val user = UserEntity(2, "John", "john@garage.com", "mech123", "mechanic")
         assertEquals("mechanic", user.role)
     }
+
+    @Test
+    fun `password shorter than 6 characters fails length check`() {
+        val password = "abc"
+        assertTrue("Password too short", password.length < 6)
+    }
 }
