@@ -27,3 +27,14 @@ The detailed description of the rubric components is given below:
 4. UI & Navigation - aesthetics, leveraging platform features, ease of use.
 5. Presentation - Team presentation, Q&A, Clear separation of tasks done.
 This paper consists of 1 pages (including the front page).
+
+## Unit Tests
+
+LoginViewModelTest covers:
+- Blank email/password validation
+- Email format validation
+- Password length check
+- Role-based routing (manager, mechanic, receptionist)
+- Unknown role handling
+
+Run tests via: `./gradlew test`
