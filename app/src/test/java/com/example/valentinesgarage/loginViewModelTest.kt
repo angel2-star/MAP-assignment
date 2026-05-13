@@ -1,3 +1,7 @@
+/**
+ * Unit tests for LoginViewModel login validation logic.
+ * Tests cover blank input handling and role-based routing.
+ */
 package com.example.valentinesgarage
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
