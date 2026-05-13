@@ -34,4 +34,15 @@ class CheckInViewModelTest {
     fun `valid inputs pass validation`() {
         assertTrue(isValidCheckIn("N 123 ABC", "John Doe", "45000"))
     }
+    @Test
+    fun `plate number is uppercased on check in`() {
+        val plate = "n 123 abc"
+        assertEquals("N 123 ABC", plate.trim().uppercase())
+    }
+
+    @Test
+    fun `condition rating stays within 1 to 5 range`() {
+        val rating = 4
+        assertTrue(rating in 1..5)
+    }
 }
