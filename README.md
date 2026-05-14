@@ -4,21 +4,6 @@ A comprehensive vehicle management application built with Kotlin, featuring real
 
 ---
 
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Code Quality](#code-quality)
-- [Testing](#testing)
-- [Contributing](#contributing)
-- [Team & Credits](#team--credits)
-
----
-
 ##  Overview
 
 Valentine's Garage is a mobile-first application designed for vehicle fleet management and maintenance tracking. It enables users to check in vehicles, capture mileage data, manage collaborative maintenance tasks, and generate comprehensive reports—all in one intuitive platform.
@@ -34,22 +19,22 @@ Valentine's Garage is a mobile-first application designed for vehicle fleet mana
 
 ## Features
 
-### 1. **Vehicle Check-In System**
+### 1. Vehicle Check-In System
 Seamlessly check in vehicles with automatic timestamp and status logging. Track vehicle availability and location in real-time.
 
-### 2. **Mileage Management**
+### 2. Mileage Management
 - Capture current odometer readings
 - Store historical mileage data
 - Track vehicle usage patterns
 - Generate mileage reports
 
-### 3. **Collaborative Task Management**
+### 3. Collaborative Task Management
 - Assign maintenance tasks to team members
 - Real-time task status updates
 - Checkbox-based task completion tracking
 - Team visibility on all ongoing work
 
-### 4. **Advanced Reporting**
+### 4. Advanced Reporting
 - Generate comprehensive vehicle reports
 - Analyze usage statistics
 - Track maintenance history
@@ -80,22 +65,22 @@ Valentine's Garage follows a **Layered Architecture** pattern with clear separat
 
 ### Design Principles
 
-** Separation of Concerns**
+Separation of Concerns
 - **UI Layer**: Handles all user interactions and visual presentation
 - **Business Logic Layer**: Contains core application logic and rules
 - **Data Layer**: Manages all data persistence and retrieval
 
-** Modularity**
+Modularity
 - Feature-based module organization
 - Each module has distinct responsibilities
 - Easy to test and maintain
 
-** No God Objects**
+No God Objects
 - Single Responsibility Principle enforced
 - No class exceeds 300 lines
 - Clear delegation of responsibilities
 
-** Resource Files**
+Resource Files
 - Strings, colors, and dimensions externalized to resources
 - Configuration files for environment-specific settings
 - Localization support through resource qualifiers
